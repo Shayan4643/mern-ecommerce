@@ -16,6 +16,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Ensure DB is connected before handling any API requests (Serverless optimization)
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -40,7 +46,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-connectDB();
+
 
 // Only listen on port if not in Vercel production environment
 if (process.env.NODE_ENV !== "production") {
