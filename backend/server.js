@@ -19,8 +19,13 @@ app.use(express.json());
 
 // Ensure DB is connected before handling any API requests (Serverless optimization)
 app.use(async (req, res, next) => {
-  await connectDB();
-  next();
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection error:", error);
+    res.status(500).json({ success: false, message: "Database Connection Failed", error: error.message });
+  }
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);

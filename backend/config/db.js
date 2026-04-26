@@ -6,13 +6,9 @@ const connectDB = async () => {
     return;
   }
   
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB connected successfully!");
-    console.log("DB Name:", mongoose.connection.name);
-  } catch (error) {
-    console.log(`Error: ${error.message}`);
-  }
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("MongoDB connected successfully!");
+  console.log("DB Name:", mongoose.connection.name);
 };
 
 export default connectDB;
