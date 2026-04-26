@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://mern-ecommerce-orcin-seven.vercel.app/api",
+  baseURL: "https://mern-ecommerce-gamma-ivory.vercel.app/api",
   //   withCredentials: true,
 });
 
